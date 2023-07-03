@@ -1,0 +1,101 @@
+@import "./variables.module";
+@import "./typography";
+@import "./responsive";
+
+html {
+  font-size: 62.5%;
+  background-color: $color-greyscale-white;
+}
+
+body {
+  font-family: "Open Sans", "Lato", sans-serif;
+  max-width: $width-desktop-max;
+  margin: 0 auto;
+  position: relative;
+  color: $color-greyscale-grey;
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+a,
+.link {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.low-opacity {
+  opacity: 0.5;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#modal {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.info {
+  margin-top: 100px;
+  text-align: center;
+  color: $color-primary-main;
+
+  @include heading-three-semi-bold;
+}
+
+//************************************************//
+// SOME MEDIA FOR WIDTH AND HEIGHT                //
+//************************************************//
+
+@media only screen and (max-width: 414px) and (max-height: 736px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+html {
+  @include responsive($responsive-max-width, 375px) {
+    font-size: 55%;
+  }
+}
+
+@media only screen and (max-width: 320px) and (min-height: 500px) {
+  html {
+    font-size: 46%;
+  }
+}
+
+// IPHONE 4 and earlier
+@media only screen and (max-width: 320px) and (max-height: 480px) {
+  html {
+    font-size: 46.5%;
+  }
+}
