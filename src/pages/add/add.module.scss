@@ -1,8 +1,10 @@
 @import "@/styles/mixins.scss";
+@import "@/styles/typography.scss";
 @import "@/styles/variables.module.scss";
 
 .form {
   @include flexColumn;
+  width: min-content;
 
   justify-content: center;
   align-items: center;
@@ -12,11 +14,29 @@
   height: 100vh;
 
   &__input {
+    @include body-one-bold;
+
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    border: 2px solid $color-primary-dark;
+    border: 2px solid $color-greyscale-dark;
     width: 30rem;
+    height: 5rem;
 
     color: $color-primary-dark;
+  }
+
+  &__textarea {
+    @include body-one-regular;
+
+    height: 20rem;
+  }
+
+  &__caption {
+    @include body-one-regular;
+    margin-bottom: 1rem;
+  }
+
+  &__btn {
+    width: 100%;
   }
 }
