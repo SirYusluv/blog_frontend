@@ -21,7 +21,7 @@ export default function Home() {
 
         <Image
           className={`${classes.add} link`}
-          alt="add button"
+          alt="add blog button"
           src={add}
           width={50}
           height={50}
