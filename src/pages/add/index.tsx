@@ -12,9 +12,15 @@ export default function Add() {
 
     const title = titleRef.current?.value;
     const detail = detailRef.current?.value;
-    const imageFile = imageRef.current?.files;
+    const imageFiles = imageRef.current?.files;
 
-    if (!title || !detail || !imageFile || !imageFile.length) return;
+    if (!title || !detail || !imageFiles || !imageFiles.length) return;
+
+    const imageFile = imageFiles[0];
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("detail", detail);
+    formData.append("file", imageFile);
   }
 
   return (
