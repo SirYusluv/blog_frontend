@@ -1,25 +1,28 @@
 import Head from "next/head";
-import { FormEvent, useContext, useRef } from "react";
+import { FormEvent, useContext, useRef, useState } from "react";
 import classes from "./add.module.scss";
 import { API_URL } from "@/util";
 import { AlertDialogContext } from "@/store/context";
 
 export default function Add() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const detailRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
-  const { dialogMessage, setDialogMessage } = useContext(AlertDialogContext);
+  const { dialogMessage: _, setDialogMessage } = useContext(AlertDialogContext);
 
   async function blogPostSubmitHandler(e: FormEvent<HTMLFormElement>) {
+    if (isLoading) return;
     e.preventDefault();
 
     const title = titleRef.current?.value;
     const detail = detailRef.current?.value;
     const imageFiles = imageRef.current?.files;
 
-    return setDialogMessage("omoe indf iofnio noisn ");
+    if (!title || !detail || !imageFiles || !imageFiles.length)
+      return setDialogMessage("Every field value must be provided.");
 
-    if (!title || !detail || !imageFiles || !imageFiles.length) return;
+    setIsLoading(true);
 
     const imageFile = imageFiles[0];
     const formData = new FormData();
@@ -32,6 +35,14 @@ export default function Add() {
       body: formData,
     });
     const blogRes = await blogResJSON.json();
+
+    setDialogMessage(blogRes.message);
+
+    titleRef.current.value = "";
+    detailRef.current.value = "";
+    imageRef.current.files = null;
+
+    setIsLoading(false);
   }
 
   return (
@@ -65,7 +76,9 @@ export default function Add() {
         <input
           type="submit"
           value="Post Blog"
-          className={`btn ${classes["form__btn"]}`}
+          className={`btn ${classes["form__btn"]} ${
+            isLoading ? "loading" : ""
+          }`}
         />
       </form>
     </>
