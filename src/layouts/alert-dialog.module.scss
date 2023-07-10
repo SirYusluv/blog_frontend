@@ -1,0 +1,17 @@
+@import "@/styles/mixins.scss";
+@import "@/styles/typography.scss";
+
+.alert-dialog {
+  @include flexColumn;
+  @include subtitle-one-regular;
+  background-color: $color-greyscale-black;
+
+  border-radius: 0.5rem;
+  padding: 3rem;
+  gap: 3rem;
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}

@@ -26,6 +26,7 @@ body {
 
 button,
 a,
+.btn,
 .link {
   cursor: pointer;
 }
@@ -45,15 +46,7 @@ a {
   transform: translate(-50%, -50%);
 }
 
-#modal {
-  position: absolute;
-  top: 50vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-}
-
-.backdrop {
+#backdrop {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -61,6 +54,7 @@ a {
   top: 0;
   left: 0;
   z-index: 99;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .info {

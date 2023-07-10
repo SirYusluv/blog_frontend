@@ -1,18 +1,23 @@
 import Head from "next/head";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useContext, useRef } from "react";
 import classes from "./add.module.scss";
+import { API_URL } from "@/util";
+import { AlertDialogContext } from "@/store/context";
 
 export default function Add() {
   const titleRef = useRef<HTMLInputElement>(null);
   const detailRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  const { dialogMessage, setDialogMessage } = useContext(AlertDialogContext);
 
-  function blogPostSubmitHandler(e: FormEvent<HTMLFormElement>) {
+  async function blogPostSubmitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const title = titleRef.current?.value;
     const detail = detailRef.current?.value;
     const imageFiles = imageRef.current?.files;
+
+    return setDialogMessage("omoe indf iofnio noisn ");
 
     if (!title || !detail || !imageFiles || !imageFiles.length) return;
 
@@ -21,6 +26,12 @@ export default function Add() {
     formData.append("title", title);
     formData.append("detail", detail);
     formData.append("file", imageFile);
+
+    const blogResJSON = await fetch(`${API_URL}/blog`, {
+      method: "POST",
+      body: formData,
+    });
+    const blogRes = await blogResJSON.json();
   }
 
   return (
